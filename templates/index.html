@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block main %}
+    <div class="boards-container">
+        {% for board in boards %}
+            <div class="card">
+                <a href="/board/{{ board.id }}" class="card">
+                    <h3>{{ board.name }}</h3>
+                </a>
+
+                <form action="/remove_board" method="POST">
+                    <input type="hidden" name="board_id" value="{{ board.id }}">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="add_boards">
+        <h2>Do you want to add a board?</h2>
+        <form action="/add_board" method="POST">
+            <input type="text" name="board" placeholder="Board's name" required>
+        </form>
+    </div>
+{% endblock %}

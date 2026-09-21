@@ -1,0 +1,114 @@
+/* ====== < STYLES GÉNÉRAUX > ====== */
+body {
+    background-color: #B8CBD0;
+    color: #424340;
+    margin: 0;
+}
+
+.navbar {
+    background-color: #C9E3CC;
+    display: flex;
+    padding: 1rem 2rem;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 25px;
+    margin: 10px;
+}
+
+h1, h2 {
+    font-family: Rubik Gemstones;
+}
+
+h3, p {
+    font-family: Alegreya;
+}
+
+/* ====== < GENERAL (LAYOUT.HTML) > ====== */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-wrap {
+    flex: 1;
+}
+
+.footer {
+    background-color: #C9E3CC;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* ====== < PAGE D'ACCUEIL (INDEX.HTML) > ====== */
+.boards-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 25px;
+    grid-row-gap: 25px;
+    margin: 10px;
+}
+
+.card {
+    background-color: #B0B9A8;
+    border-radius: 25px;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.add_boards {
+    text-align: center;
+}
+
+/* ====== < VUE DU TABLEAU (BOARD.HTML) > ====== */
+.columns-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 25px;
+    padding: 20px;
+    align-items: flex-start;
+
+}
+
+.column-card {
+    background-color: #EEE6D8;
+    border-radius: 25px;
+    padding: 5px;
+    min-width: 300px;
+    flex-shrink: 0;
+    max-width: 300px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.btn {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+/* ====== < GESTION DES ITEMS > ====== */
+.item {
+    border: outset;
+    border-radius: 25px;
+    padding: 10px;
+    background-color: #E3CD8B;
+}
+
+.item_image {
+    max-width: 200px;
+}
+
+.btn-update {
+    margin: 5px;
+}
+
+.add_button {
+    width: -webkit-fill-available;
+}

@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% block main %}
+    <h1>{{ board_name }}</h1>
+
+    <div class="columns-container">
+        {% for column in columns %}
+            <div class="column-card">
+                <div class="header">
+                    <h2>{{ column.name }}</h2>
+                    <div class="btn">
+                        <form action="/remove_column" method="POST">
+                            <input type="hidden" name="column_id" value="{{ column.id }}">
+                            <input type="hidden" name="board_id" value="{{ board_id }}">
+                            <button type="submit" class="btn-delete">🗑️</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="items-list">
+                    {% for item in items %}
+                        {% if item.column_id == column.id %}
+                            <div class="item">
+                                <div class="header">
+                                    <h3>{{ item.name }}</h3>
+                                    <div class="btn">
+                                        <form action="/remove_item" method="POST">
+                                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                                            <input type="hidden" name="board_id" value="{{ board_id }}">
+                                            <button type="submit" class="btn-delete">🗑️</button>
+                                        </form>
+
+                                        <button class="btn-update" onclick="edit_modal_{{ item.id }}.showModal()">✏️</button>
+                                    </div>
+                                </div>
+
+                                <dialog id="edit_modal_{{ item.id }}">
+                                    <form action="/update_item" method="POST">
+                                        <input type="hidden" name="item_id" value="{{ item.id }}">
+                                        <input type="hidden" name="board_id" value="{{ board_id }}">
+
+                                        <input type="text" name="item_name" value="{{ item.name }}" required>
+                                        <textarea name="content">{{ item.content }}</textarea>
+
+                                        <select name="type">
+                                            <option value="text" {% if item.type == 'text' %}selected{% endif %}>Text ✍️</option>
+                                            <option value="image" {% if item.type == 'image' %}selected{% endif %}>Image 🖼️</option>
+                                        </select>
+
+                                        <button type="submit">Save</button>
+                                    </form>
+                                    <button onclick="edit_modal_{{ item.id }}.close()">Cancel</button>
+                                </dialog>
+
+                                <div class="item-body">
+                                    {% if item.type == "image" %}
+                                        <img class="item_image" src="{{ item.content }}" alt="{{ item.name }}">
+                                    {% else %}
+                                        <p>{{ item.content | render_markdown | safe }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="add_category">
+                    <hr noshade>
+                    <button class="add_button" onclick="add_modal_{{ column.id }}.showModal()">➕​</button>
+
+                    <dialog id="add_modal_{{ column.id }}">
+                        <form action="/add_item" method="POST">
+                            <input type="hidden" name="board_id" value="{{ board_id }}">
+                            <input type="hidden" name="column_id" value="{{ column.id }}">
+                            <input type="text" name="item_name" placeholder="Title" required>
+                            <textarea name="content" placeholder="Content or image's URL"></textarea>
+                            <select name="type">
+                                <option value="text">Text ✍️</option>
+                                <option value="image">Image 🖼️</option>
+                            </select>
+                            <button type="submit">Add</button>
+                        </form>
+                        <button onclick="add_modal_{{ column.id }}.close()">Fermer</button>
+                    </dialog>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="add_boards">
+        <h2>Add a column ?</h2>
+        <form action="/add_column" method="POST">
+            <input type="hidden" name="id" value="{{ board_id }}">
+            <input type="text" name="column" placeholder="Column's name" required>
+            <button type="submit">Add</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link href="/static/styles.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Patrick+Hand&family=Rubik+Gemstones&display=swap" rel="stylesheet">
+        <title>NataBoards</title>
+    </head>
+
+    <body>
+        <div class="page-container">
+            <!-- ====== < NAVBAR > ====== -->
+            <nav class="navbar">
+                <p>
+                    Hello, Nathan !
+                </p>
+                <a href="/" class="link">
+                    Dashboard
+                </a>
+                <p>
+                    Logout
+                </p>
+            </nav>
+
+            <!-- ====== < WEBPAGE > ====== -->
+            <main class="content-wrap">
+                {% block main %}{% endblock %}
+            </main>
+
+            <!-- ====== < FOOTER > ====== -->
+            <footer class="footer">
+                <p>© 2025 Nathan | Built for CS50 Final Project.</p>
+                <p><b>Github</b> : NathanSNB68</p>
+                <a href="mailto:natsnb68@gmail.com">Get in touch</a>
+            </footer>
+        </div>
+    </body>
+
