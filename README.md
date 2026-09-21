@@ -1,76 +1,123 @@
-# NATABOARDS - Final Project CS50
+# NataBoards
 
-## Video Demo: https://youtu.be/bQwpvN5TBos
+[![CS50x Final Project](https://img.shields.io/badge/CS50x-Final%20Project-blue.svg?style=flat-square)](https://cs50.harvard.edu/x/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Framework-Flask-000000?style=flat-square&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![SQLite](https://img.shields.io/badge/Database-SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 
-## Description
-
-**NataBoards** is a web-based task management application inspired by tools like Padlet and Trello. It allows users to create personalized boards, organize them into columns (categories), and add cards (items) containing either text or images.
-
-### Key Features:
-
-* **Dynamic Boards**: Create and delete multiple boards from a central dashboard.
-* **Horizontal Layout**: Columns are organized horizontally with a custom scrollbar for better navigation.
-* **Rich Content**: Items support **Markdown** formatting for text (bold, lists, links) and can display images via URLs.
-* **Full CRUD**: Users can Create, Read, Update, and Delete boards, columns, and items.
+> A lightweight, web-based Kanban task management board built with Python, Flask, and SQLite. Inspired by workflow tools like Trello and Padlet.
 
 ---
 
-## Files and Structure
+## 📹 Video Demo
 
-### `app.py`
-
-The heart of the application. It manages Flask routes and database interactions. It is organized into clear sections:
-
-* **Configuration**: Initializing Flask, SQLite3, and Markdown filters.
-* **Navigation**: Routes for the index and specific board views.
-* **Management**: Specialized routes for adding, updating, and removing data.
-
-### `nataboards.db`
-
-A SQLite database containing three main tables:
-
-1. `boards`: Stores the name and ID of each project.
-2. `columns`: Stores column names, IDs, numerical `position`, color, and the parent `board_id`.
-3. `items`: Stores content (text/URL), titles, position, color, type (text/image), and the parent `column_id`.
-
-### `static/styles.css`
-
-Contains all custom styling. Key implementations include:
-
-* **Flexbox & Grid**: Used for the board layout and horizontal column scrolling.
-* **Sticky Footer**: Ensures the footer stays at the bottom regardless of content length.
-* **Custom Scrollbar**: Tailored to match the application's color palette for a cohesive UI.
-
-### Templates (`templates/`)
-
-* `layout.html`: The base template containing the navbar and footer.
-* `index.html`: The dashboard displaying all available boards.
-* `board.html`: The main workspace displaying columns and items for a specific board.
+Watch the comprehensive video demonstration of NataBoards on YouTube:  
+👉 **[Watch the Demo on YouTube](https://youtu.be/bQwpvN5TBos)**
 
 ---
 
-## Roadmap / Soon...
+## 📌 Project Overview
 
-* **Multi-user integration**: User accounts and private boards.
-* **Drag & Drop**: Ability to modify the position of elements manually.
-* **Enhanced Styling**: UI to modify the color of elements directly from the interface.
-* **Customization**: More personalization options!
+**NataBoards** provides an intuitive, distraction-free environment for organizing projects, homework, and software features into customizable visual boards. It replaces cluttered desktop workflows with a horizontally structured interface powered by dynamic data rendering.
 
-## Installation
-
-To run this project locally:
-
-1. Install dependencies:
-`pip install flask cs50 markdown`
-2. Run the Flask app:
-`flask run`
+### Key Highlights
+* **Dynamic Multi-Board Workspace**: Create, navigate, and remove distinct project boards seamlessly from a central hub.
+* **Horizontal Board Hierarchy**: Structured columns (categories) arranged horizontally with tailored scrolling mechanics for ergonomic navigation on large screens.
+* **Rich Markdown Integration**: Support for standard **Markdown syntax** within cards (bullet lists, code blocks, bold text, links) and direct image embedding through URL parsing.
+* **Full CRUD Operations**: Complete Create, Read, Update, and Delete coverage across boards, columns, and tasks with real-time UI updates.
 
 ---
 
-© 2025 Nathan | Built for CS50 Final Project.
+## 🏛️ Architecture & System Design
 
-**GitHub**: [NathanSNB68](https://www.google.com/search?q=https://github.com/NathanSNB68)
+```text
+[ Client Browser ]
+        │
+        ├── HTTP GET / POST (Jinja2 Templates & Forms)
+        ▼
+[ Flask Application (app.py) ]
+        │
+        ├── Markdown Filter Engine (misaka / markdown)
+        └── Database Connector
+                ▼
+      [ SQLite3 (nataboards.db) ]
+          ├── boards (id, name)
+          ├── columns (id, board_id, name, position, color)
+          └── items (id, column_id, title, content, type, position, color)
 
-**Contact**: natsnb68@gmail.com
+```
 
-*Thanks to the CS50 staff for this amazing experience. I learned a lot and I am excited to keep learning!*
+---
+
+## 📂 Repository Structure
+
+```text
+.
+├── app.py              # Application controller, routing logic, and database transactions
+├── helpers.txt         # Development notes, SQL queries, and layout checklists
+├── nataboards.db       # Relational SQLite database schema and persistent storage
+├── static/
+│   └── styles.css      # CSS styling: Flexbox/Grid systems, responsive layout, custom scrollbar
+└── templates/
+    ├── layout.html     # Base HTML skeleton (navigation bar, viewport meta, footer)
+    ├── index.html      # Main dashboard displaying board selection and creation forms
+    └── board.html      # Interactive workspace displaying columns, items, and action modals
+
+```
+
+---
+
+## 🚀 Quickstart & Installation
+
+Follow these instructions to clone, set up, and run NataBoards locally.
+
+### Prerequisites
+
+* Python 3.9+
+* `pip` package manager
+
+### Setup Steps
+
+1. **Clone the repository:**
+```bash
+git clone [https://github.com/NathanSNB/cs50-finalproject.git](https://github.com/NathanSNB/cs50-finalproject.git)
+cd cs50-finalproject
+
+```
+
+
+2. **Create and activate a virtual environment (recommended):**
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+```
+
+
+3. **Install dependencies:**
+```bash
+pip install Flask cs50 markdown
+
+```
+
+
+4. **Launch the Flask server:**
+```bash
+flask run
+
+```
+
+
+Open your browser and navigate to `http://127.0.0.1:5000/`.
+
+---
+
+## 👤 Author & Contact
+
+Developed by **NathanSNB** as the Capstone Project for **Harvard CS50x**.
+
+* **GitHub**: [@NathanSNB](https://www.google.com/search?q=https://github.com/NathanSNB&utm_source=gemini)
+* **Website**: [natsnb68.mathysie.eu](https://natsnb68.mathysie.eu?utm_source=gemini)
+* **Email**: [natsnb68@proton.me](https://www.google.com/search?q=mailto%3Anatsnb68%40proton.me)
+
+*Special thanks to David J. Malan and the CS50 instructional team for providing the curriculum and foundational tools for this project.*
